@@ -1,2 +1,2 @@
 # BAS.Tor
-Tor addition to BAS
+Tor network in BAS
