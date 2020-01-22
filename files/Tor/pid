@@ -1,0 +1,3 @@
+AUTHENTICATE
+GETINFO process/pid
+QUIT
