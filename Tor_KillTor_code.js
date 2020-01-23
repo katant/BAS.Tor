@@ -1,6 +1,6 @@
 TOR_PORT = <%= port %> - 1000
 RANDOM_FILE = "temp_" + rand() + ".bat"
-native("filesystem", "writefile", JSON.stringify({path: RANDOM_FILE,value: "chcp 65001\n" + (("C:\u005cTor".length>0) ? ("cd " + "" + "\n") : "" ) + ("cd custom/Tor/files/Netcat/\nnc.exe localhost " + TOR_PORT + " \u003c pid"),base64:false,append:false}))
+native("filesystem", "writefile", JSON.stringify({path: RANDOM_FILE,value: "chcp 65001\n" + (("".length>0) ? ("cd " + "" + "\n") : "" ) + ("cd custom/Tor/files/Netcat/\nnc.exe localhost " + TOR_PORT + " \u003c pid"),base64:false,append:false}))
 native_async("processmanager", "start", JSON.stringify({location: RANDOM_FILE, working_folder: "", waitfinish: true, arguments: "", version: 2}))!
 try
 {
