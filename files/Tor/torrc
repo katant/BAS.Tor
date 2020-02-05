@@ -4,3 +4,5 @@ FastFirstHop 0
 EnforceDistinctSubnets 0
 UseEntryGuards 0
 ExcludeNodes {??}
+GeoIPFile geoip
+GeoIPv6File geoip6
