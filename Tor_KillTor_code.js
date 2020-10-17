@@ -14,8 +14,8 @@ PROCESS_STANDART_OUTPUT = _result()
 sleep(1000)!
 native("filesystem", "removefile", RANDOM_FILE)
 PID = PROCESS_STANDART_OUTPUT.split('pid=')[1].split(' ')[0]
-RANDOM_FILE = "temp_" + rand() + ".bat"
-native("filesystem", "writefile", JSON.stringify({path: RANDOM_FILE,value: "chcp 65001\n" + (("".length>0) ? ("cd " + "" + "\n") : "" ) + ("taskkill /F /PID " + PID),base64:false,append:false}))
+RANDOM_FILE = "tempKill_" + rand() + ".bat"
+native("filesystem", "writefile", JSON.stringify({path: RANDOM_FILE,value: "cmd /U\n chcp 65001\n" + (("".length>0) ? ("cd " + "" + "\n") : "" ) + ("taskkill /F /PID " + PID),base64:false,append:false}))
 native_async("processmanager", "start", JSON.stringify({location: RANDOM_FILE, working_folder: "", waitfinish: true, arguments: "", version: 2}))!
 try
 {
@@ -26,5 +26,5 @@ PROCESS_ERROR_OUTPUT = base64_decode(split[1])
 {
 PROCESS_STANDART_OUTPUT = _result()
 }
-sleep(1000)!
+sleep(1500)!
 native("filesystem", "removefile", RANDOM_FILE)
