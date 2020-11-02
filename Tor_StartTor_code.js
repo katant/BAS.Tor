@@ -3,11 +3,11 @@ TOR_CUSTOM = ""
 if (<%= change_ip %> === true) {
     TOR_CUSTOM += " --MaxCircuitDirtiness 10 --NewCircuitPeriod 10"
 }
-if ('<%= allow %>'.length > 0){
-    TOR_CUSTOM += " --ExitNodes " + "{" + '<%= allow %>'.toUpperCase().split(" ").join("},{") + "}"
+if (<%= allow %>.length > 0){
+    TOR_CUSTOM += " --ExitNodes " + "{" + <%= allow %>.toUpperCase().split(" ").join("},{") + "}"
 }
-if ('<%= disallow %>'.length > 0){
-    TOR_CUSTOM += " --ExcludeNodes " + "{" + '<%= disallow %>'.toUpperCase().split(" ").join("},{") + "}"
+if (<%= disallow %>.length > 0){
+    TOR_CUSTOM += " --ExcludeNodes " + "{" + <%= disallow %>.toUpperCase().split(" ").join("},{") + "}"
 }
 RANDOM_FILE = "temp_" + rand() + ".bat"
 native("filesystem", "writefile", JSON.stringify({path: RANDOM_FILE,value: "chcp 65001\n" + (("".length>0) ? ("cd " + "" + "\n") : "" ) + ("cd custom/Tor/files/Tor\ntor.exe -f torrc -SocksPort 9" + TOR_PORT + " -ControlPort 8" + TOR_PORT + " -DataDirectory %TEMP%/torf" + TOR_PORT + TOR_CUSTOM),base64:false,append:false}))

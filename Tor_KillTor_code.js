@@ -1,6 +1,6 @@
-TOR_PORT = <%= port %>
+TOR_PORT = JSON.parse(<%= port %>)
 RANDOM_FILE = "temp_" + rand() + ".bat"
-native("filesystem", "writefile", JSON.stringify({path: RANDOM_FILE,value: "chcp 65001\n" + (("".length>0) ? ("cd " + "" + "\n") : "" ) + ("netstat -ao -n 0 | findstr " + TOR_PORT),base64:false,append:false}))
+native("filesystem", "writefile", JSON.stringify({path: RANDOM_FILE,value: "chcp 65001\n" + (("".length>0) ? ("cd " + "" + "\n") : "" ) + ("cd custom/Tor/files/Netcat/\nnc.exe localhost " + (TOR_PORT - 1000) + " \u003c pid"),base64:false,append:false}))
 native_async("processmanager", "start", JSON.stringify({location: RANDOM_FILE, working_folder: "", waitfinish: true, arguments: "", version: 2}))!
 try
 {
@@ -13,14 +13,7 @@ PROCESS_STANDART_OUTPUT = _result()
 }
 sleep(1000)!
 native("filesystem", "removefile", RANDOM_FILE)
-try
-{
-PID = PROCESS_STANDART_OUTPUT.replace(/\s\s+/g, ' ').split('LISTENING ')[1].split(' ')[0]
-}catch(e)
-{
-log("Tor pid get error! Check output:")
-log(PROCESS_STANDART_OUTPUT)
-}
+PID = PROCESS_STANDART_OUTPUT.split('pid=')[1].split(' ')[0]
 RANDOM_FILE = "temp_" + rand() + ".bat"
 native("filesystem", "writefile", JSON.stringify({path: RANDOM_FILE,value: "chcp 65001\n" + (("".length>0) ? ("cd " + "" + "\n") : "" ) + ("taskkill /F /PID " + PID),base64:false,append:false}))
 native_async("processmanager", "start", JSON.stringify({location: RANDOM_FILE, working_folder: "", waitfinish: true, arguments: "", version: 2}))!
@@ -33,5 +26,5 @@ PROCESS_ERROR_OUTPUT = base64_decode(split[1])
 {
 PROCESS_STANDART_OUTPUT = _result()
 }
-sleep(1500)!
+sleep(1000)!
 native("filesystem", "removefile", RANDOM_FILE)
