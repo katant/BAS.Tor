@@ -1,4 +1,4 @@
-TOR_PORT = Math.floor(Math.random() * 999);
+TOR_PORT = Math.floor(Math.random() * 900) + 100;;
 TOR_CUSTOM = ""
 if (<%= change_ip %> === true) {
     TOR_CUSTOM += " --MaxCircuitDirtiness 10 --NewCircuitPeriod 10"
