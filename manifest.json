@@ -88,9 +88,9 @@
         "en": "Tor network",
         "ru": "Сеть Tor"
     },
-    "developer_email": "katant.savelev@yandex.ru",
-    "developer_name": "Katant",
-    "developer_site": "https://t.me/lapkidev",
+    "developer_email": "contact@lapki.dev",
+    "developer_name": "Lapki",
+    "developer_site": "https://t.me/lapki",
     "embeddeddata": [
         
     ],
@@ -107,7 +107,7 @@
         
     },
     "major_version": 1,
-    "minor_version": 9,
+    "minor_version": 10,
     "modules": [
         
     ],
