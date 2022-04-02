@@ -9,6 +9,9 @@ if (<%= allow %>.length > 0){
 if (<%= disallow %>.length > 0){
     TOR_CUSTOM += " --ExcludeNodes " + "{" + <%= disallow %>.toUpperCase().split(" ").join("},{") + "}"
 }
+if (<%= bridge %>.length > 0){
+    TOR_CUSTOM += ' --UseBridges 1 --bridge "' + <%= bridge %> + '"'
+}
 RANDOM_FILE = "temp_" + rand() + ".bat"
 native("filesystem", "writefile", JSON.stringify({path: RANDOM_FILE,value: "chcp 65001\n" + (("".length>0) ? ("cd " + "" + "\n") : "" ) + ("cd custom/Tor/files/Tor\ntor.exe -f torrc -SocksPort 9" + TOR_PORT + " -ControlPort 8" + TOR_PORT + " -DataDirectory %TEMP%/torf" + TOR_PORT + TOR_CUSTOM),base64:false,append:false}))
 native_async("processmanager", "start", JSON.stringify({location: RANDOM_FILE, working_folder: "", waitfinish: false, arguments: "", version: 2}))!
